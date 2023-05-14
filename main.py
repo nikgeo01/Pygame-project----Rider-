@@ -1,28 +1,14 @@
 import pygame
-import sys
-import random
+import time
+import math
 
-pygame.init()
-clock = pygame.time.Clock()
+TRACK = pygame.image.load("track.png")
 
-# Screen
-screen_width = 1280
-screen_height = 720
-screen = pygame.display.set_mode((screen_width, screen_height))
-pygame.display.set_caption('Rider')
+TRACK_BORDER = pygame.image.load("track-border.jpg")
 
-rider = pygame.image.load('assets/rider.png')
+RED_CAR = pygame.image.load("red-car.png")
+GREEN_CAR = pygame.image.load("green-car.png")
 
-surface = pygame.Surface((50, 50))
-
-obstacle_disk = pygame.image.load('assets/obstacle_disk.png')
-
-bg_img = pygame.image.load('assets/bg.png')
-while True:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            sys.exit()
-
-    pygame.display.flip()
-    clock.tick(60)
+WIDTH = TRACK.get_width()
+HEIGHT = TRACK.get_height()
+SCREEN = pygame.display.set_mode((WIDTH, HEIGHT))
