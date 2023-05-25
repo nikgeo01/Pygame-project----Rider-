@@ -2,8 +2,7 @@ import pygame
 import time
 import math
 
-from functions import resize_image
-from functions import rotate_image
+from imagesHandling import resize_image, rotate_image
 
 TRACK = pygame.image.load("assets/track.png")
 TRACK_BORDER = pygame.image.load("assets/track-border.png")
