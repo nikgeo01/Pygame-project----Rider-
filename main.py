@@ -93,11 +93,11 @@ def draw(screen, images, player1_car, player2_car, player1_score, player2_score,
 
     text_score_1 = font.render('RED CAR SCORE: ' + str(player1_score), True, (255, 255, 255))
     textRect_score_1 = text_score_1.get_rect()
-    textRect_score_1.center = (100, 50)
+    textRect_score_1.center = (678, 140)
 
     text_score_2 = font.render('BLUE CAR SCORE: ' + str(player2_score), True, (255, 255, 255))
     textRect_score_2 = text_score_2.get_rect()
-    textRect_score_2.center = (100, 100)
+    textRect_score_2.center = (678, 160)
 
     screen.blit(text_score_1, textRect_score_1)
     screen.blit(text_score_2, textRect_score_2)
@@ -115,7 +115,7 @@ player1_scoring_timeout = 0
 player2_scoring_timeout = 0
 
 pygame.init()
-font = pygame.font.Font(FONT_PATH, 32)
+font = pygame.font.Font(FONT_PATH, 15)
 
 while True:
 
