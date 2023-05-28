@@ -9,7 +9,7 @@ TRACK_BORDER = pygame.image.load("assets/track-border.png")
 FINISH_LINE = pygame.image.load("assets/finish-line.png")
 FINISH_LINE_MASK = pygame.mask.from_surface(FINISH_LINE)
 TRACK_BORDER_MASK = pygame.mask.from_surface(TRACK_BORDER)
-IMAGES = [(TRACK, (0, 0)), ((TRACK_BORDER), (0, 0)), (FINISH_LINE, (250, 464))]
+IMAGES = [(TRACK, (0, 0)), (FINISH_LINE, (250, 464))]
 
 CLOCK = pygame.time.Clock()
 
@@ -22,7 +22,7 @@ SCREEN = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Rider")
 
 SCORING_TIMEOUT = 840
-
+FONT_PATH = "assets/SHOWG.ttf"
 
 class Cars:
 
@@ -84,12 +84,23 @@ class PlayerBlueCar(Cars):
     POSITION = (x, y)
 
 
-def draw(screen, images, player1_car, player2_car):
+def draw(screen, images, player1_car, player2_car, player1_score, player2_score, font):
     for img, pos in images:
         screen.blit(img, pos)
 
     player1_car.draw(screen)
     player2_car.draw(screen)
+
+    text_score_1 = font.render('RED CAR SCORE: ' + str(player1_score), True, (255, 255, 255))
+    textRect_score_1 = text_score_1.get_rect()
+    textRect_score_1.center = (100, 50)
+
+    text_score_2 = font.render('BLUE CAR SCORE: ' + str(player2_score), True, (255, 255, 255))
+    textRect_score_2 = text_score_2.get_rect()
+    textRect_score_2.center = (100, 100)
+
+    screen.blit(text_score_1, textRect_score_1)
+    screen.blit(text_score_2, textRect_score_2)
 
     pygame.display.update()
 
@@ -103,10 +114,13 @@ player2_score = 0
 player1_scoring_timeout = 0
 player2_scoring_timeout = 0
 
+pygame.init()
+font = pygame.font.Font(FONT_PATH, 32)
+
 while True:
 
     CLOCK.tick(60)
-    draw(SCREEN, IMAGES, player1_car, player2_car)
+    draw(SCREEN, IMAGES, player1_car, player2_car, player1_score, player2_score, font)
 
     moving1 = False
     pressed = pygame.key.get_pressed()
