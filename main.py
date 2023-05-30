@@ -24,6 +24,10 @@ pygame.display.set_caption("Rider")
 SCORING_TIMEOUT = 840
 FONT_PATH = "assets/SHOWG.ttf"
 
+pygame.mixer.init()
+pygame.mixer.music.load("assets/OutroSong.mp3")
+pygame.mixer.music.play()
+pygame.mixer.music.set_volume(0.05)
 
 class Cars:
 
@@ -114,6 +118,10 @@ def draw_winning(screen, score1, score2):
         text_rect_winning_1.center = (WIDTH / 2, HEIGHT / 2)
         screen.blit(text_winning_1, text_rect_winning_1)
         pygame.display.update()
+        pygame.mixer.music.stop()
+        pygame.mixer.music.load("assets/Legend.mp3")
+        pygame.mixer.music.set_volume(1)
+        pygame.mixer.music.play()
         time.sleep(5)
         pygame.quit()
     if score2 == 3:
@@ -122,6 +130,10 @@ def draw_winning(screen, score1, score2):
         text_rect_winning_2.center = (WIDTH / 2, HEIGHT / 2)
         screen.blit(text_winning_2, text_rect_winning_2)
         pygame.display.update()
+        pygame.mixer.music.stop()
+        pygame.mixer.music.load("assets/Legend.mp3")
+        pygame.mixer.music.set_volume(1)
+        pygame.mixer.music.play()
         time.sleep(5)
         pygame.quit()
 
@@ -142,7 +154,6 @@ winning_font = pygame.font.Font(FONT_PATH, 50)
 while True:
 
     CLOCK.tick(60)
-    draw(SCREEN, IMAGES, player1_car, player2_car, player1_score, player2_score)
 
     moving1 = False
     pressed = pygame.key.get_pressed()
@@ -195,6 +206,7 @@ while True:
             print("Player 2 score: ", player2_score)
             player2_scoring_timeout = 0
 
+    draw(SCREEN, IMAGES, player1_car, player2_car, player1_score, player2_score)
     draw_winning(SCREEN, player1_score, player2_score)
 
     for event in pygame.event.get():
