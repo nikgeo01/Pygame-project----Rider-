@@ -65,3 +65,6 @@ This game is released under the MIT License. You are free to use, modify, and di
 ## Acknowledgments
 - [Pygame](https://www.pygame.org/): The Pygame library used for game development.
 - [Stack Overflow](https://stackoverflow.com/): The Stack Overflow community for providing helpful insights and solutions to programming challenges.
+- [OpenAI](https://openai.com/): OpenAI for their contributions to the development of advanced language models like GPT.
+
+Enjoy playing the Rider Game! Feel free to contribute or provide feedback.
