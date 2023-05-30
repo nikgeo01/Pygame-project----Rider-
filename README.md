@@ -30,6 +30,15 @@ This is a simple racing game developed using Pygame. The game allows two players
 6. Reach the finish line to score points. Each player can score once per timeout period.
 7. The game ends when one player reaches a score of 3. The winner is displayed on the screen.
 
+## Game Features (Not Implemented)
+While the current version of the Rider Game provides an enjoyable racing experience, there are several additional features that could be considered for future development:
+
+- Multiple Levels: The game currently features a single track. Adding multiple levels with different designs and challenges would enhance gameplay variety.
+- Game Modes: Introducing different game modes, such as time trial, lap race, or elimination, would provide players with diverse gameplay experiences.
+- Power-ups: Including power-ups on the track, such as speed boosts or temporary invincibility, would add excitement and strategic elements to the gameplay.
+- AI Opponents: Adding AI-controlled cars as opponents would enable single-player gameplay and allow players to compete against computer-controlled opponents.
+- Online Multiplayer: Implementing online multiplayer functionality would enable players to compete with friends or other players worldwide.
+
 ## Requirements
 - Python
 - Pygame
