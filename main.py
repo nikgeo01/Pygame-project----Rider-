@@ -86,43 +86,45 @@ class PlayerBlueCar(Cars):
     POSITION = (x, y)
 
 
-def draw(screen, images, player1_car, player2_car, player1_score, player2_score, font):
+def draw(screen, images, car1, car2, score1, score2):
     for img, pos in images:
         screen.blit(img, pos)
 
-    player1_car.draw(screen)
-    player2_car.draw(screen)
+    car1.draw(screen)
+    car2.draw(screen)
 
-    text_score_1 = font.render('RED CAR SCORE: ' + str(player1_score), True, (255, 255, 255))
-    textRect_score_1 = text_score_1.get_rect()
-    textRect_score_1.center = (678, 140)
+    text_score_1 = font.render('RED CAR SCORE: ' + str(score1), True, (255, 255, 255))
+    text_rect_score_1 = text_score_1.get_rect()
+    text_rect_score_1.center = (678, 140)
 
-    text_score_2 = font.render('BLUE CAR SCORE: ' + str(player2_score), True, (255, 255, 255))
-    textRect_score_2 = text_score_2.get_rect()
-    textRect_score_2.center = (678, 160)
+    text_score_2 = font.render('BLUE CAR SCORE: ' + str(score2), True, (255, 255, 255))
+    text_rect_score_2 = text_score_2.get_rect()
+    text_rect_score_2.center = (678, 160)
 
-    screen.blit(text_score_1, textRect_score_1)
-    screen.blit(text_score_2, textRect_score_2)
+    screen.blit(text_score_1, text_rect_score_1)
+    screen.blit(text_score_2, text_rect_score_2)
 
     pygame.display.update()
 
-def draw_winning(screen, player1_score, player2_score, winning_font):
-    if player1_score == 3:
+
+def draw_winning(screen, score1, score2):
+    if score1 == 3:
         text_winning_1 = winning_font.render('RED CAR WINS!', True, (255, 255, 255))
-        textRect_winning_1 = text_winning_1.get_rect()
-        textRect_winning_1.center = (WIDTH / 2, HEIGHT / 2)
-        screen.blit(text_winning_1, textRect_winning_1)
+        text_rect_winning_1 = text_winning_1.get_rect()
+        text_rect_winning_1.center = (WIDTH / 2, HEIGHT / 2)
+        screen.blit(text_winning_1, text_rect_winning_1)
         pygame.display.update()
         time.sleep(5)
         pygame.quit()
-    if player2_score == 3:
+    if score2 == 3:
         text_winning_2 = winning_font.render('BLUE CAR WINS!', True, (255, 255, 255))
-        textRect_winning_2 = text_winning_2.get_rect()
-        textRect_winning_2.center = (WIDTH / 2, HEIGHT / 2)
-        screen.blit(text_winning_2, textRect_winning_2)
+        text_rect_winning_2 = text_winning_2.get_rect()
+        text_rect_winning_2.center = (WIDTH / 2, HEIGHT / 2)
+        screen.blit(text_winning_2, text_rect_winning_2)
         pygame.display.update()
         time.sleep(5)
         pygame.quit()
+
 
 player1_car = PLayerRedCar(4, 4)
 player2_car = PlayerBlueCar(4, 4)
@@ -140,7 +142,7 @@ winning_font = pygame.font.Font(FONT_PATH, 50)
 while True:
 
     CLOCK.tick(60)
-    draw(SCREEN, IMAGES, player1_car, player2_car, player1_score, player2_score, font)
+    draw(SCREEN, IMAGES, player1_car, player2_car, player1_score, player2_score)
 
     moving1 = False
     pressed = pygame.key.get_pressed()
@@ -154,7 +156,7 @@ while True:
     if pressed[pygame.K_DOWN]:
         player1_car.move_back()
         moving1 = True
-    if moving1 == False:
+    if not moving1:
         player1_car.slow_down()
 
     moving2 = False
@@ -168,32 +170,32 @@ while True:
     if pressed[pygame.K_s]:
         player2_car.move_back()
         moving2 = True
-    if moving2 == False:
+    if not moving2:
         player2_car.slow_down()
 
-    if player1_car.collision(TRACK_BORDER_MASK, 0, 0) != None:
+    if player1_car.collision(TRACK_BORDER_MASK, 0, 0) is not None:
         player1_car.bounce_back()
         print("Player 1 crashed")
 
-    if player2_car.collision(TRACK_BORDER_MASK, 0, 0) != None:
+    if player2_car.collision(TRACK_BORDER_MASK, 0, 0) is not None:
         player2_car.bounce_back()
         print("Player 2 crashed")
 
     player1_scoring_timeout += 1
-    if player1_car.collision(FINISH_LINE_MASK, 250, 464) != None:
+    if player1_car.collision(FINISH_LINE_MASK, 250, 464) is not None:
         if player1_scoring_timeout >= SCORING_TIMEOUT:
             player1_score += 1
             print("Player 1 score: ", player1_score)
             player1_scoring_timeout = 0
 
     player2_scoring_timeout += 1
-    if player2_car.collision(FINISH_LINE_MASK, 250, 464) != None:
+    if player2_car.collision(FINISH_LINE_MASK, 250, 464) is not None:
         if player2_scoring_timeout >= SCORING_TIMEOUT:
             player2_score += 1
             print("Player 2 score: ", player2_score)
             player2_scoring_timeout = 0
 
-    draw_winning(SCREEN, player1_score, player2_score, winning_font)
+    draw_winning(SCREEN, player1_score, player2_score)
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
